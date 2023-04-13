@@ -58,8 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("Server is started");
-    ServerSocket.bind('127.0.0.1', 8080).then((ServerSocket socketServer) {
+    print("Starting the server");
+    var host = InternetAddress("127.0.0.1", type: InternetAddressType.unix);
+    ServerSocket.bind(host, 8080).then((ServerSocket socketServer) {
+      print("Server is started");
       socketServer.listen((Socket socket) {
         socket.listen((List<int> data) {
           String result = utf8.decode(data);
